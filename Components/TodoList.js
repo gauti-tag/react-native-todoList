@@ -4,17 +4,33 @@ import { View, Text, Button, StyleSheet, ScrollView, TextInput } from "react-nat
 import Todo from "./Todo";
 
 const TodoList = () => {
-    const [title, setTitle] = useState('Tiehoule');
+    const [title, setTitle] = useState('Todo List');
+    const [text, setText] = useState();
+    const [list, setList] = useState(['Hello World']);
+
+    const addItem = () => {
+        const updatedList = list;
+        updatedList.push(text);
+        setList(updatedList);
+        setText('');
+    }
+
     return (
         <View style={{ width: '80%', marginBottom: 60 }}>
             <Text style={[styles.align, styles.font]}>{title}</Text>
             <ScrollView>
-                <Todo name='Red' />
-                <Todo name='Blue' />
+                {/* Map list in todo components */}
+                {list.map((x, index) =>
+                    <Todo key={index} item={x} index={index} />
+                )}
             </ScrollView>
             <View>
-                <TextInput style={styles.input} />
-                <Button title="Change me" onPress={() => setTitle('Set my name')} />
+                <TextInput
+                    style={styles.input}
+                    value={text}
+                    onChangeText={(text) => setText(text)}
+                />
+                <Button title="Add Item" onPress={addItem} />
             </View>
         </View>
     )
