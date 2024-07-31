@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
 const Todo = (props) => {
 
@@ -8,6 +8,11 @@ const Todo = (props) => {
             <Text>
                 {props.item}
             </Text>
+            <Button
+                title={'Delete'}
+                color={'red'}
+                onPress={() => props.delete(props.item)}
+            />
         </View>
     )
 }
